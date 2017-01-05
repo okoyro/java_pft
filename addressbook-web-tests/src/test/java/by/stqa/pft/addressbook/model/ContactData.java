@@ -9,7 +9,8 @@ public class ContactData {
   private final String homephonenumber;
   private final String email;
 
-  public ContactData(String firstname, String middlename, String lastnane, String title, String company, String homephonenumber, String email) {
+  public ContactData(String firstname, String middlename, String lastnane, String title,
+                     String company, String homephonenumber, String email) {
     this.firstname = firstname;
     this.middlename = middlename;
     this.lastnane = lastnane;
