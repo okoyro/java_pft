@@ -13,6 +13,7 @@ public class NavigationHelper extends HelperBase {
     click(By.linkText("groups"));
   }
   public void gotoNewContactPage() {
-      wd.get("http://localhost/addressbook/edit.php");
-    }
+    clickLink("http://localhost/addressbook/edit.php");
+  }
+
 }

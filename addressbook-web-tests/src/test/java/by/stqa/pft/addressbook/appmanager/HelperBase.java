@@ -30,4 +30,8 @@ public class HelperBase {
       return false;
     }
   }
+
+  protected void clickLink(String url) {
+    wd.get(url);
+  }
 }
