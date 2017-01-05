@@ -15,5 +15,7 @@ public class NavigationHelper extends HelperBase {
   public void gotoNewContactPage() {
     clickLink("http://localhost/addressbook/edit.php");
   }
-
+   public void gotoHomePage(){
+     clickLink("http://localhost/addressbook/index.php");
+   }
 }
