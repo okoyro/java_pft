@@ -29,7 +29,9 @@ public class TestBase1 {
     login();
   }
 
-  public void submitContactCreation() {wd.findElement(By.name("submit")).click();}
+  public void submitContactCreation() {
+    wd.findElement(By.name("submit")).click();
+  }
 
   public void fillNewContactForm(ContactData contactData) {
     wd.findElement(By.name("firstname")).click();
