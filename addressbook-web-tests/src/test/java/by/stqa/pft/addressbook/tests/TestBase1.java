@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeMethod;
 
 public class TestBase1 {
 
-  protected final ApplicationManager1 app1 = new ApplicationManager1();
+  public final ApplicationManager1 app1 = new ApplicationManager1();
 
   @BeforeMethod
   public void setUp() throws Exception {
