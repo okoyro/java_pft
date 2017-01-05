@@ -63,7 +63,7 @@ public class TestBase1 {
     wd.get("http://localhost/addressbook/edit.php");
   }
 
-  private void login() {
+  public void login() {
     wd.get("http://localhost/addressbook/index.php");
     wd.findElement(By.name("user")).click();
     wd.findElement(By.name("user")).clear();
