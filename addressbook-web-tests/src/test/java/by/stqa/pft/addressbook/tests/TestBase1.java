@@ -78,4 +78,12 @@ public class TestBase1 {
   public void tearDown() {
     wd.quit();
   }
+
+  public void deleteSelectedContact() {wd.findElement(By.xpath("//div[@id='content']/form[2]/div[2]/input")).click();}
+
+  public void selectContact() {
+    if (!wd.findElement(By.xpath("//tr[@name='entry']/td[1]/input")).isSelected()) {
+      wd.findElement(By.xpath("//tr[@name='entry']/td[1]/input")).click();
+    }
+  }
 }
