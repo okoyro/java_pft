@@ -12,17 +12,14 @@ public class GroupData {
   }
 
   public String getName() {
-
     return name;
   }
 
   public String getHeader() {
-
     return header;
   }
 
   public String getFooter() {
-
     return footer;
   }
 }
