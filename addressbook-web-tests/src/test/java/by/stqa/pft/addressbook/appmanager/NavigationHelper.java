@@ -19,6 +19,10 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void gotoNewContactPage() {
+    if (isElementPresent(By.tagName("h1"))
+        && wd.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry")) {
+      return;
+    }
     clickLink("http://localhost/addressbook/edit.php");
   }
 
