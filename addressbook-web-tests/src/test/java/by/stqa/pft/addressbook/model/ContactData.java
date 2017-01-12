@@ -1,14 +1,14 @@
 package by.stqa.pft.addressbook.model;
 
 public class ContactData {
-  private final String firstname;
-  private final String middlename;
-  private final String lastnane;
-  private final String title;
-  private final String company;
-  private final String homephonenumber;
+  private String firstname;
+  private String middlename;
+  private String lastnane;
+  private String title;
+  private String company;
+  private String homephonenumber;
   private String group;
-  private final String email;
+  private String email;
 
   public ContactData(String firstname, String middlename,
                      String lastnane, String title, String company,
