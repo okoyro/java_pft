@@ -49,7 +49,7 @@ public class GroupHelper extends HelperBase {
 
   public void createGroup(GroupData group) {
     initGroupCreation();
-    fillGroupForm(new GroupData(group));
+    fillGroupForm(group);
     submitGroupCreation();
     returnToGroupPage();
   }
