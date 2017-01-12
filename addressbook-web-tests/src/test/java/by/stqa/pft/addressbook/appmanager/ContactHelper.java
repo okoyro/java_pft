@@ -24,9 +24,15 @@ public class ContactHelper extends HelperBase {
     type(By.name("company"), contactData.getCompany());
     type(By.name("home"), contactData.getHomephonenumber());
     type(By.name("email"), contactData.getEmail());
+    //    условие для проверки наличия/отсутствия элемента(выпадаюший список),
+    // характерного только для страницы создания нового контакта
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-    }  else {
+//      услвие, проверяющее что выпадающий список пуст(нет групп в данный момент)
+      if (contactData.getGroup() != null) {
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+      }
+    }
+    else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
   }
@@ -51,5 +57,14 @@ public class ContactHelper extends HelperBase {
 
   public void submitContactModification() {
     click(By.name("update"));
+  }
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.cssSelector("img[alt='Details']"));
+  }
+
+  public void createContact(ContactData contact, boolean creation) {
+    fillNewContactForm(contact, creation);
+    submitContactCreation();
   }
 }

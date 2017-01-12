@@ -31,7 +31,8 @@ public class HelperBase {
     try {
       wd.switchTo().alert();
       return true;
-    } catch (NoAlertPresentException e) {
+    }
+    catch (NoAlertPresentException e) {
       return false;
     }
   }
@@ -43,8 +44,9 @@ public class HelperBase {
   protected boolean isElementPresent(By locator) {
     try {
       wd.findElement(locator);
-      return false;
-    } catch (NoSuchElementException ex) {
+      return true;
+    }
+    catch (NoSuchElementException ex) {
       return false;
     }
   }
