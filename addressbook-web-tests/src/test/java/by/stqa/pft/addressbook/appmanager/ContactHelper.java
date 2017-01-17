@@ -17,6 +17,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void fillNewContactForm(ContactData contactData, boolean creation) {
+//   параметр "boolean creation" необходим для того, чтобы проверить условие с выпадаюшим списком
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("middlename"), contactData.getMiddlename());
     type(By.name("lastname"), contactData.getLastnane());
@@ -63,8 +64,8 @@ public class ContactHelper extends HelperBase {
     return isElementPresent(By.cssSelector("img[alt='Details']"));
   }
 
-  public void createContact(ContactData contact, boolean creation) {
-    fillNewContactForm(contact, creation);
+  public void createContact(ContactData contact) {
+    fillNewContactForm(contact, true);
     submitContactCreation();
   }
 }

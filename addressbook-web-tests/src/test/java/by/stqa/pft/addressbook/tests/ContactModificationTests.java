@@ -10,7 +10,7 @@ public class ContactModificationTests extends TestBase {
     if (!app.getContactHelper().isThereAContact()) {
       app.getNavigationHelper().gotoNewContactPage();
       app.getContactHelper().createContact(new ContactData("Fname", "Mname", "Lname", "title", "company",
-                                                           "987-654-32", "test@test.test", null), true);
+                                                           "987-654-32", "test@test.test", null));
       app.getNavigationHelper().gotoHomePage();
     }
     app.getContactHelper().selectContactForEdit();
