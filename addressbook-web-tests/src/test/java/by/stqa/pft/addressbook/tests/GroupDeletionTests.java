@@ -21,6 +21,19 @@ public class GroupDeletionTests extends TestBase {
     List<GroupData> after = app.getGroupHelper().getGroupList();
     Assert.assertEquals(after.size(), before.size() - 1);
 
+    // удаляем из списка before тот элемент, который удалили в тесте - его индекс =  before.size() - 1
+    // для того, чтобы проверить, что в списке after не присутствует именно этот элемент;
+    before.remove(before.size() - 1);
+
+    // для проверки прогоняем все элементы списка after по циклу
+    //    for (int i = 0; i < after.size(); i++) {
+    //      Assert.assertEquals(before.get(i), after.get(i));
+    //    }
+
+    // после генерации методов toString & equals в классе GroupData можно не прогонять элементы списка через цикл, а просто
+    // сравнить списки
+    Assert.assertEquals(before, after);
+
   }
 
 }
