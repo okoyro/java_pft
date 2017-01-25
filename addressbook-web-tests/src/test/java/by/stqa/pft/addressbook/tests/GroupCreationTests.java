@@ -13,27 +13,27 @@ public class GroupCreationTests extends TestBase {
   public void testGroupCreation() {
     app.getNavigationHelper().gotoGroupPage();
     List<GroupData> before = app.getGroupHelper().getGroupList();
-    GroupData group = new GroupData("test1", "test2", "test3");
+    GroupData group = new GroupData("test_X", "test2", "test3");
     app.getGroupHelper().createGroup(group);
     List<GroupData> after = app.getGroupHelper().getGroupList();
     Assert.assertEquals(after.size(), before.size() + 1);
-
-    //добавляем ту же группу, которую добавили в тесте
-    before.add(group);
 
     // для проверки прогоняем все элементы списка по циклу
     //находим группу с максимальным числом в параметре id, т.к. справедливо предположить, что у только что созданной
     //группы будет именно такой id
 
-    int max = 0;
-    for (GroupData g : after) {
-      if (g.getId() > max) {
-        max = g.getId();
-      }
-    }
-    group.setId(max);
+    //    int max = 0;
+    //    for (GroupData g : after) {
+    //      if (g.getId() > max) {
+    //        max = g.getId();
+    //      }
+    //    }
 
+    //    список превращен в поток, по нему пробегает функция compare и сравниваются объекты типа GroupData (по id)
+    group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
 
+    //добавляем ту же группу, которую добавили в тесте
+    before.add(group);
     Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
 
 
