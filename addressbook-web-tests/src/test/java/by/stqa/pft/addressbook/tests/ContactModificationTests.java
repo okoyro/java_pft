@@ -1,12 +1,14 @@
 package by.stqa.pft.addressbook.tests;
 
 import by.stqa.pft.addressbook.model.ContactData;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class ContactModificationTests extends TestBase {
 
   @Test
   public void testContactModification() {
+    int before = app.getContactHelper().getContactCount();
     if (!app.getContactHelper().isThereAContact()) {
       app.getNavigationHelper().gotoNewContactPage();
       app.getContactHelper().createContact(new ContactData("Fname", "Mname", "Lname", "title", "company",
@@ -19,5 +21,7 @@ public class ContactModificationTests extends TestBase {
                              "234-567-89", "test@test.test(ed)", null), false);
     app.getContactHelper().submitContactModification();
     app.getNavigationHelper().gotoHomePage();
+    int after = app.getContactHelper().getContactCount();
+    Assert.assertEquals(after, before);
   }
 }

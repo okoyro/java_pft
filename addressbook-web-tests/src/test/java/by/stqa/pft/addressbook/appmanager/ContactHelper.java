@@ -17,7 +17,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void fillNewContactForm(ContactData contactData, boolean creation) {
-//   параметр "boolean creation" необходим для того, чтобы проверить условие с выпадаюшим списком
+    //   параметр "boolean creation" необходим для того, чтобы проверить условие с выпадаюшим списком
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("middlename"), contactData.getMiddlename());
     type(By.name("lastname"), contactData.getLastnane());
@@ -28,7 +28,7 @@ public class ContactHelper extends HelperBase {
     //    условие для проверки наличия/отсутствия элемента(выпадаюший список),
     // характерного только для страницы создания нового контакта
     if (creation) {
-//      услвие, проверяющее что выпадающий список пуст(нет групп в данный момент)
+      //      услвие, проверяющее что выпадающий список пуст(нет групп в данный момент)
       if (contactData.getGroup() != null) {
         new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
       }
@@ -67,5 +67,9 @@ public class ContactHelper extends HelperBase {
   public void createContact(ContactData contact) {
     fillNewContactForm(contact, true);
     submitContactCreation();
+  }
+
+  public int getContactCount() {
+    return wd.findElements(By.cssSelector("img[alt='Details']")).size();
   }
 }
