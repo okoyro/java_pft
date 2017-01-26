@@ -42,9 +42,9 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
   }
 
-  public void selectContact() {
+  public void selectContact(int index) {
     if (!wd.findElement(By.xpath("//tr[@name='entry']/td[1]/input")).isSelected()) {
-      wd.findElement(By.xpath("//tr[@name='entry']/td[1]/input")).click();
+      wd.findElements(By.xpath("//tr[@name='entry']/td[1]/input")).get(index).click();
     }
   }
 
@@ -52,8 +52,9 @@ public class ContactHelper extends HelperBase {
     wd.switchTo().alert().accept();
   }
 
-  public void selectContactForEdit() {
-    click(By.cssSelector("img[alt=\"Edit\"]"));
+  public void selectContactForEdit(int indexForEdit) {
+    wd.findElements(By.cssSelector("img[alt=\"Edit\"]")).get(indexForEdit).click();
+//    click(By.cssSelector("img[alt=\"Edit\"]"));
   }
 
   public void submitContactModification() {

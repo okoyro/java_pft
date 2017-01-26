@@ -15,7 +15,7 @@ public class ContactModificationTests extends TestBase {
                                                            "987-654-32", "test@test.test", null));
       app.getNavigationHelper().gotoHomePage();
     }
-    app.getContactHelper().selectContactForEdit();
+    app.getContactHelper().selectContactForEdit(before - 1);
     app.getContactHelper().fillNewContactForm
             (new ContactData("Fname(ed)", "Mname(ed)", "Lname(ed)", "title(ed)", "company(ed)",
                              "234-567-89", "test@test.test(ed)", null), false);
