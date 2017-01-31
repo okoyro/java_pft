@@ -26,8 +26,6 @@ public class ContactHelper extends HelperBase {
     return contacts;
   }
 
-  ;
-
   public ContactHelper(WebDriver wd) {
     super(wd);
   }
