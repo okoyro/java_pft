@@ -14,13 +14,13 @@ public class ContactHelper extends HelperBase {
 
   public List<ContactData> getContactList() {
     List<ContactData> contacts = new ArrayList<ContactData>();
-    List<WebElement> rows = wd.findElements(By.xpath("//tr[@name = 'entry']"));
+    List<WebElement> rows = wd.findElements(By.xpath("//tr[@name = 'entry']"));   //все строки на странице
     for (WebElement row : rows) {
-      List<WebElement> cells = row.findElements(By.tagName("td"));
+      List<WebElement> cells = row.findElements(By.tagName("td"));  //разбили строки на ячейки
       String lastname = cells.get(1).getText();
       String firstname = cells.get(2).getText();
-      //        String id = cells.get(0).findElement(By.xpath("input")).getAttribute("id");
-      ContactData contact = new ContactData(firstname, null, lastname, null, null, null, null, null);
+      String id = cells.get(0).findElement(By.xpath("input")).getAttribute("id");
+      ContactData contact = new ContactData(id, firstname, null, lastname, null, null, null, null, null);
       contacts.add(contact);
     }
     return contacts;

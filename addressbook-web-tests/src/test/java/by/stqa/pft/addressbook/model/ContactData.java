@@ -1,6 +1,7 @@
 package by.stqa.pft.addressbook.model;
 
 public class ContactData {
+  private String id;
   private String firstname;
   private String middlename;
   private String lastnane;
@@ -10,10 +11,11 @@ public class ContactData {
   private String group;
   private String email;
 
-  public ContactData(String firstname, String middlename,
+  public ContactData(String id, String firstname, String middlename,
                      String lastnane, String title, String company,
                      String homephonenumber,
                      String email, String group) {
+    this.id = id;
     this.firstname = firstname;
     this.middlename = middlename;
     this.lastnane = lastnane;
@@ -22,6 +24,25 @@ public class ContactData {
     this.homephonenumber = homephonenumber;
     this.group = group;
     this.email = email;
+  }
+// создаем еще один конструктор, в аоторый не передаем id в качестве параметра - это для группы с неизвестным id
+  public ContactData(String firstname, String middlename,
+                     String lastnane, String title, String company,
+                     String homephonenumber,
+                     String email, String group) {
+    this.id = null;
+    this.firstname = firstname;
+    this.middlename = middlename;
+    this.lastnane = lastnane;
+    this.title = title;
+    this.company = company;
+    this.homephonenumber = homephonenumber;
+    this.group = group;
+    this.email = email;
+  }
+
+  public String getId() {
+    return id;
   }
 
   public String getFirstname() {
@@ -59,7 +80,8 @@ public class ContactData {
   @Override
   public String toString() {
     return "ContactData{" +
-           "firstname='" + firstname + '\'' +
+           "id='" + id + '\'' +
+           ", firstname='" + firstname + '\'' +
            ", lastnane='" + lastnane + '\'' +
            '}';
   }
@@ -71,6 +93,7 @@ public class ContactData {
 
     ContactData that = (ContactData) o;
 
+    if (id != null ? !id.equals(that.id) : that.id != null) return false;
     if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
     return lastnane != null ? lastnane.equals(that.lastnane) : that.lastnane == null;
 
@@ -78,7 +101,8 @@ public class ContactData {
 
   @Override
   public int hashCode() {
-    int result = firstname != null ? firstname.hashCode() : 0;
+    int result = id != null ? id.hashCode() : 0;
+    result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
     result = 31 * result + (lastnane != null ? lastnane.hashCode() : 0);
     return result;
   }
