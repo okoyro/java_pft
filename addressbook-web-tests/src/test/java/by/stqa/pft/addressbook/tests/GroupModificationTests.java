@@ -2,32 +2,33 @@ package by.stqa.pft.addressbook.tests;
 
 import by.stqa.pft.addressbook.model.GroupData;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Comparator;
 import java.util.List;
 
 public class GroupModificationTests extends TestBase {
-  @Test
-  public void testGroupModification() {
-
+  @BeforeMethod
+  public void ensurePreconditions() {
     app.getNavigationHelper().gotoGroupPage();
     if (!app.getGroupHelper().isThereAGroup()) {
       app.getGroupHelper().createGroup(new GroupData("test1", null, null));
     }
+  }
+
+  @Test
+  public void testGroupModification() {
     List<GroupData> before = app.getGroupHelper().getGroupList();
-    app.getGroupHelper().selectGroup(before.size() - 1);
-    app.getGroupHelper().initGroupModification();
-    GroupData group = new GroupData(before.get(before.size() - 1).getId(), "test1(ed)", "test2(ed)", null);
-    app.getGroupHelper().fillGroupForm(group);
-    app.getGroupHelper().submitGroupModification();
-    app.getGroupHelper().returnToGroupPage();
+    int index = before.size() - 1;
+    GroupData group = new GroupData(before.get(index).getId(), "test1(ed)", "test2(ed)", null);
+    app.getGroupHelper().modifyGroup(index, group);
     List<GroupData> after = app.getGroupHelper().getGroupList();
     Assert.assertEquals(after.size(), before.size());
 
     // удаляем из списка before тот элемент, который удалили в тесте - его индекс =  before.size() - 1
     // и добавляем в список именно ту группу, которую мы модифицировали
-    before.remove(before.size() - 1);
+    before.remove(index);
     before.add(group);
 
     // реализуем упорядочивание списков по id и затем сравниваем их
@@ -40,4 +41,5 @@ public class GroupModificationTests extends TestBase {
     // модифицированная группа
     // Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
   }
+
 }
