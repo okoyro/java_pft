@@ -11,11 +11,11 @@ public class GroupCreationTests extends TestBase {
 
   @Test
   public void testGroupCreation() {
-    app.getNavigationHelper().gotoGroupPage();
-    List<GroupData> before = app.getGroupHelper().getGroupList();
+    app.goTo().gotoGroupPage();
+    List<GroupData> before = app.group().list();
     GroupData group = new GroupData("test_X", "test2", "test3");
-    app.getGroupHelper().createGroup(group);
-    List<GroupData> after = app.getGroupHelper().getGroupList();
+    app.group().create(group);
+    List<GroupData> after = app.group().list();
     Assert.assertEquals(after.size(), before.size() + 1);
 
     // для проверки прогоняем все элементы списка по циклу
@@ -41,10 +41,10 @@ public class GroupCreationTests extends TestBase {
 
 
     //    there is an ability to use one method or a few methods to create group
-    //    app.getGroupHelper().initGroupCreation();
-    //    app.getGroupHelper().fillGroupForm(new GroupData("test1", null, null));
-    //    app.getGroupHelper().submitGroupCreation();
-    //    app.getGroupHelper().returnToGroupPage();
+    //    app.group().initGroupCreation();
+    //    app.group().fillGroupForm(new GroupData("test1", null, null));
+    //    app.group().submitGroupCreation();
+    //    app.group().returnToGroupPage();
   }
 
 }
