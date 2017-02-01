@@ -2,25 +2,29 @@ package by.stqa.pft.addressbook.model;
 
 public class GroupData {
   //меняем тип id со string на int потому что надо искать id с наибольшим числовым значением в тесте создания групп
-  private int id;
+  private int id = Integer.MAX_VALUE;
   private String name;
   private String header;
   private String footer;
 
-  public GroupData(String name, String header, String footer) {
-    this.id = Integer.MAX_VALUE;
-    this.name = name;
-    this.header = header;
-    this.footer = footer;
+  public GroupData withId(int id) {
+    this.id = id;
+    return this;
   }
 
-  public GroupData(int id, String name, String header, String footer) {
-    // вводим параметр id, он уникален, это необходимо для правильной работы тестов в случае сравнения множеств, т.к. во множестве
-    // группы с одинаковыми именами воспринимаются как один объект
-    this.id = id;
+  public GroupData withName(String name) {
     this.name = name;
+    return this;
+  }
+
+  public GroupData withHeader(String header) {
     this.header = header;
+    return this;
+  }
+
+  public GroupData withFooter(String footer) {
     this.footer = footer;
+    return this;
   }
 
   public int getId() {return id;}
@@ -61,9 +65,4 @@ public class GroupData {
            ", name='" + name + '\'' +
            '}';
   }
-
-  public void setId(int id) {
-    this.id = id;
-  }
-
 }
