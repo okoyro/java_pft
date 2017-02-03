@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
+import java.util.Set;
 
 public class GroupDeletionTests extends TestBase {
   @BeforeMethod
@@ -18,23 +18,13 @@ public class GroupDeletionTests extends TestBase {
 
   @Test
   public void testGroupDeletion() {
-    List<GroupData> before = app.group().list();
-    int index = before.size() - 1;
-    app.group().delete(index);
-    List<GroupData> after = app.group().list();
+    Set<GroupData> before = app.group().all();
+    GroupData deletedGroup = before.iterator().next();
+    app.group().delete(deletedGroup);
+    Set<GroupData> after = app.group().all();
     Assert.assertEquals(after.size(), before.size() - 1);
 
-    // удаляем из списка before тот элемент, который удалили в тесте - его индекс =  before.size() - 1
-    // для того, чтобы проверить, что в списке after не присутствует именно этот элемент;
-    before.remove(index);
-
-    // для проверки прогоняем все элементы списка after по циклу
-    //    for (int i = 0; i < after.size(); i++) {
-    //      Assert.assertEquals(before.get(i), after.get(i));
-    //    }
-
-    // после генерации методов toString & equals в классе GroupData можно не прогонять элементы списка через цикл, а просто
-    // сравнить списки
+    before.remove(deletedGroup);
     Assert.assertEquals(before, after);
 
   }
