@@ -4,9 +4,11 @@ import by.stqa.pft.addressbook.model.GroupData;
 import by.stqa.pft.addressbook.model.Groups;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupModificationTests extends TestBase {
 
@@ -23,10 +25,10 @@ public class GroupModificationTests extends TestBase {
     Groups before = app.group().all();
     GroupData modifiedGroup = before.iterator().next();
     GroupData group = new GroupData()
-            .withId(modifiedGroup.getId()).withName("test1(ed)").withHeader("test2(ed)").withFooter("test3(ed)");
+            .withId(modifiedGroup.getId()).withName("test_p(ed)").withHeader("test2(ed)").withFooter("test3(ed)");
     app.group().modify(group);
+    assertThat(app.group().сount(), equalTo(before.size()));
     Groups after = app.group().all();
-    Assert.assertEquals(after.size(), before.size());
     MatcherAssert.assertThat(after, CoreMatchers.equalTo(before.without(modifiedGroup).withAdded(group)));
   }
 }
