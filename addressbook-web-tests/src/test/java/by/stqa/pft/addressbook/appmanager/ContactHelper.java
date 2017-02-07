@@ -20,8 +20,7 @@ public class ContactHelper extends HelperBase {
       String lastname = cells.get(1).getText();
       String firstname = cells.get(2).getText();
       int id = Integer.parseInt(cells.get(0).findElement(By.xpath("input")).getAttribute("id"));
-      ContactData contact = new ContactData(id, firstname, null, lastname, null, null, null, null, null);
-      contacts.add(contact);
+      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastnane(lastname));
     }
     return contacts;
   }
