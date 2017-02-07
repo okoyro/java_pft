@@ -1,20 +1,19 @@
 package by.stqa.pft.addressbook.appmanager;
 
 import by.stqa.pft.addressbook.model.ContactData;
+import by.stqa.pft.addressbook.model.Contacts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
-  public Set<ContactData> all() {
-    Set<ContactData> contacts = new HashSet<ContactData>();
+  public Contacts all() {
+    Contacts contacts = new Contacts();
     List<WebElement> rows = wd.findElements(By.xpath("//tr[@name = 'entry']"));   //все строки на странице
     for (WebElement row : rows) {
       List<WebElement> cells = row.findElements(By.tagName("td"));  //разбили строки на ячейки
