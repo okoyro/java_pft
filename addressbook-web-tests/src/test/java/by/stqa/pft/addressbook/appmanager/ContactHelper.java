@@ -87,7 +87,18 @@ public class ContactHelper extends HelperBase {
     submitContactCreation();
   }
 
+  public void modifyContact(int index, ContactData contact) {
+    selectContactForEdit(index);
+    fillNewContactForm(contact, false);
+    submitContactModification();
+    returnToHomePage();
+  }
+
   public int getContactCount() {
     return wd.findElements(By.cssSelector("img[alt='Details']")).size();
   }
+
+  public void returnToHomePage() {
+      click(By.linkText("home"));
+    }
 }
