@@ -8,12 +8,27 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
   public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<ContactData>();
+    List<WebElement> rows = wd.findElements(By.xpath("//tr[@name = 'entry']"));   //все строки на странице
+    for (WebElement row : rows) {
+      List<WebElement> cells = row.findElements(By.tagName("td"));  //разбили строки на ячейки
+      String lastname = cells.get(1).getText();
+      String firstname = cells.get(2).getText();
+      int id = Integer.parseInt(cells.get(0).findElement(By.xpath("input")).getAttribute("id"));
+      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastnane(lastname));
+    }
+    return contacts;
+  }
+
+  public Set<ContactData> all() {
+    Set<ContactData> contacts = new HashSet<ContactData>();
     List<WebElement> rows = wd.findElements(By.xpath("//tr[@name = 'entry']"));   //все строки на странице
     for (WebElement row : rows) {
       List<WebElement> cells = row.findElements(By.tagName("td"));  //разбили строки на ячейки
