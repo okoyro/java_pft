@@ -19,14 +19,17 @@ public class ContactPhoneTests extends TestBase {
   }
 
   @Test
-  public void testContactPhones(){
+  public void testContactPhones() {
     app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromEditForm = app.contact().contactInfoFromEditForm(contact);
 
-    assertThat(contact.getHomePhone(), equalTo(contactInfoFromEditForm.getHomePhone()));
-    assertThat(contact.getMobilePhone(), equalTo(contactInfoFromEditForm.getMobilePhone()));
-    assertThat(contact.getWorkPhone(), equalTo(contactInfoFromEditForm.getWorkPhone()));
+    assertThat(contact.getHomePhone(), equalTo(cleaned(contactInfoFromEditForm.getHomePhone())));
+    assertThat(contact.getMobilePhone(), equalTo(cleaned(contactInfoFromEditForm.getMobilePhone())));
+    assertThat(contact.getWorkPhone(), equalTo(cleaned(contactInfoFromEditForm.getWorkPhone())));
   }
-
+  public String cleaned(String phone) {
+    return phone.replaceAll("\\s", "").replaceAll("[-()]", ""); //"\\s" - это пробелы, "[-()]" - это все дефисы и скобки
+  }
 }
+
