@@ -1,7 +1,7 @@
 package by.stqa.pft.addressbook.model;
 
 public class ContactData {
-  private int id;
+  private int id = Integer.MAX_VALUE;
   private String firstname;
   private String middlename;
   private String lastnane;
@@ -11,39 +11,49 @@ public class ContactData {
   private String group;
   private String email;
 
-  public ContactData(int id, String firstname, String middlename,
-                     String lastnane, String title, String company,
-                     String homephonenumber,
-                     String email, String group) {
+  public ContactData withId(int id) {
     this.id = id;
-    this.firstname = firstname;
-    this.middlename = middlename;
-    this.lastnane = lastnane;
-    this.title = title;
-    this.company = company;
-    this.homephonenumber = homephonenumber;
-    this.group = group;
-    this.email = email;
+    return this;
   }
 
-  // создаем еще один конструктор, в аоторый не передаем id в качестве параметра - это для группы с неизвестным id
-  public ContactData(String firstname, String middlename,
-                     String lastnane, String title, String company,
-                     String homephonenumber,
-                     String email, String group) {
-    this.id = Integer.MAX_VALUE;
+  public ContactData withFirstname(String firstname) {
     this.firstname = firstname;
-    this.middlename = middlename;
-    this.lastnane = lastnane;
-    this.title = title;
-    this.company = company;
-    this.homephonenumber = homephonenumber;
-    this.group = group;
-    this.email = email;
+    return this;
   }
 
-  public void setId(int id) {
-    this.id = id;
+  public ContactData withMiddlename(String middlename) {
+    this.middlename = middlename;
+    return this;
+  }
+
+  public ContactData withLastnane(String lastnane) {
+    this.lastnane = lastnane;
+    return this;
+  }
+
+  public ContactData withTitle(String title) {
+    this.title = title;
+    return this;
+  }
+
+  public ContactData withCompany(String company) {
+    this.company = company;
+    return this;
+  }
+
+  public ContactData withHomephonenumber(String homephonenumber) {
+    this.homephonenumber = homephonenumber;
+    return this;
+  }
+
+  public ContactData withGroup(String group) {
+    this.group = group;
+    return this;
+  }
+
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
   }
 
   public int getId() {
