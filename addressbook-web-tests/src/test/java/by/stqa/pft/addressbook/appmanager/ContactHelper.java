@@ -70,8 +70,8 @@ public class ContactHelper extends HelperBase {
     }
   }
 
-  public void deleteSelectedContact() {
-    click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+  public void closeAlert() {
+    wd.switchTo().alert().accept();
   }
 
   public void selectContact(int index) {
@@ -80,8 +80,10 @@ public class ContactHelper extends HelperBase {
     }
   }
 
-  public void closeAlert() {
-    wd.switchTo().alert().accept();
+  private void selectContactById(int id) {
+    wd.findElement(By.cssSelector(".center input[value = '" + id + "']")).isSelected();
+    wd.findElement(By.cssSelector(".center input[value = '" + id + "']")).click();
+
   }
 
   public void selectContactForEdit(int indexForEdit) {
@@ -113,6 +115,17 @@ public class ContactHelper extends HelperBase {
     deleteSelectedContact();
     closeAlert();
     returnToHomePage();
+  }
+
+  public void delete(ContactData contact) {
+    selectContactById(contact.getId());
+    deleteSelectedContact();
+    closeAlert();
+    returnToHomePage();
+  }
+
+  public void deleteSelectedContact() {
+    click(By.cssSelector("input[value='Delete']"));
   }
 
   public int getContactCount() {
