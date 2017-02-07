@@ -7,25 +7,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class ContactHelper extends HelperBase {
-
-  public List<ContactData> list() {
-    List<ContactData> contacts = new ArrayList<ContactData>();
-    List<WebElement> rows = wd.findElements(By.xpath("//tr[@name = 'entry']"));   //все строки на странице
-    for (WebElement row : rows) {
-      List<WebElement> cells = row.findElements(By.tagName("td"));  //разбили строки на ячейки
-      String lastname = cells.get(1).getText();
-      String firstname = cells.get(2).getText();
-      int id = Integer.parseInt(cells.get(0).findElement(By.xpath("input")).getAttribute("id"));
-      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastnane(lastname));
-    }
-    return contacts;
-  }
 
   public Set<ContactData> all() {
     Set<ContactData> contacts = new HashSet<ContactData>();
@@ -81,20 +67,12 @@ public class ContactHelper extends HelperBase {
   }
 
   private void selectContactById(int id) {
-    wd.findElement(By.cssSelector("a[href*='edit.php?id=" + id +"']")).click();
+    wd.findElement(By.cssSelector("a[href*='edit.php?id=" + id + "']")).click();
 
-  }
-
-  public void selectContactForEdit(int indexForEdit) {
-    wd.findElements(By.cssSelector("img[alt=\"Edit\"]")).get(indexForEdit).click();
   }
 
   public void submitContactModification() {
     click(By.name("update"));
-  }
-
-  public boolean isThereAContact() {
-    return isElementPresent(By.cssSelector("img[alt='Details']"));
   }
 
   public void create(ContactData contact) {
@@ -109,17 +87,9 @@ public class ContactHelper extends HelperBase {
     returnToHomePage();
   }
 
-  public void delete(int index) {
-    selectContact(index);
-    deleteSelectedContact();
-    closeAlert();
-    returnToHomePage();
-  }
-
   public void delete(ContactData contact) {
     selectContactById(contact.getId());
     deleteSelectedContact();
-    closeAlert();
     returnToHomePage();
   }
 
@@ -129,6 +99,10 @@ public class ContactHelper extends HelperBase {
 
   public int getContactCount() {
     return wd.findElements(By.cssSelector("img[alt='Details']")).size();
+  }
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.cssSelector("img[alt='Details']"));
   }
 
   public void returnToHomePage() {
