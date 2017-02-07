@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
-  public List<ContactData> getContactList() {
+  public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> rows = wd.findElements(By.xpath("//tr[@name = 'entry']"));   //все строки на странице
     for (WebElement row : rows) {
@@ -82,15 +82,22 @@ public class ContactHelper extends HelperBase {
     return isElementPresent(By.cssSelector("img[alt='Details']"));
   }
 
-  public void createContact(ContactData contact) {
+  public void create(ContactData contact) {
     fillNewContactForm(contact, true);
     submitContactCreation();
   }
 
-  public void modifyContact(int index, ContactData contact) {
+  public void modify(int index, ContactData contact) {
     selectContactForEdit(index);
     fillNewContactForm(contact, false);
     submitContactModification();
+    returnToHomePage();
+  }
+
+  public void delete(int index) {
+    selectContact(index);
+    deleteSelectedContact();
+    closeAlert();
     returnToHomePage();
   }
 
@@ -99,6 +106,6 @@ public class ContactHelper extends HelperBase {
   }
 
   public void returnToHomePage() {
-      click(By.linkText("home"));
-    }
+    click(By.linkText("home"));
+  }
 }

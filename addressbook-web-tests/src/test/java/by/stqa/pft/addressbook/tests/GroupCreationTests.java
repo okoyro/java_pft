@@ -11,7 +11,7 @@ public class GroupCreationTests extends TestBase {
 
   @Test(enabled = false)
   public void testGroupCreation() {
-    app.goTo().gotoGroupPage();
+    app.goTo().groupPage();
     Groups before = app.group().all();
     GroupData group = new GroupData().withName("test_y");
     app.group().create(group);
@@ -23,7 +23,7 @@ public class GroupCreationTests extends TestBase {
 
   @Test(enabled = false)
   public void testBadGroupCreation() {
-    app.goTo().gotoGroupPage();
+    app.goTo().groupPage();
     Groups before = app.group().all();
     GroupData group = new GroupData().withName("test'"); //это негативный тест, т.к.  апостроф - запрещенный символ
     app.group().create(group);
