@@ -9,17 +9,38 @@ public class ContactData {
   private String mobilePhone;
   private String workPhone;
   private String allPhones;
-
-  private String title;
-
-  private String company;
-
+  private String address;
   private String group;
   private String email;
+  private String email2;
+  private String email3;
+  private String allEmails;
+
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
+  }
+
+  public ContactData withEmail2(String email2) {
+    this.email2 = email2;
+    return this;
+  }
+
+  public ContactData withEmail3(String email3) {
+    this.email3 = email3;
+    return this;
+  }
+
+  public ContactData withAllEmails(String allEmails) {
+    this.allEmails = allEmails;
+    return this;
+  }
+
   public ContactData withId(int id) {
     this.id = id;
     return this;
   }
+
   public ContactData withFirstname(String firstname) {
     this.firstname = firstname;
     return this;
@@ -34,12 +55,10 @@ public class ContactData {
     this.lastnane = lastnane;
     return this;
   }
-
   public ContactData withHomePhone(String homePhone) {
     this.homePhone = homePhone;
     return this;
   }
-
   public ContactData withMobilePhone(String mobilePhone) {
     this.mobilePhone = mobilePhone;
     return this;
@@ -55,23 +74,13 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withTitle(String title) {
-    this.title = title;
-    return this;
-  }
-
-  public ContactData withCompany(String company) {
-    this.company = company;
+  public ContactData withAddress(String address) {
+    this.address = address;
     return this;
   }
 
   public ContactData withGroup(String group) {
     this.group = group;
-    return this;
-  }
-
-  public ContactData withEmail(String email) {
-    this.email = email;
     return this;
   }
 
@@ -91,6 +100,22 @@ public class ContactData {
     return lastnane;
   }
 
+  public String getEmail() {
+    return email;
+  }
+
+  public String getEmail2() {
+    return email2;
+  }
+
+  public String getEmail3() {
+    return email3;
+  }
+
+  public String getAllEmails() {
+    return allEmails;
+  }
+
   public String getHomePhone() {
     return homePhone;
   }
@@ -107,16 +132,8 @@ public class ContactData {
     return allPhones;
   }
 
-  public String getTitle() {
-    return title;
-  }
-
-  public String getCompany() {
-    return company;
-  }
-
-  public String getEmail() {
-    return email;
+  public String getAddress() {
+    return address;
   }
 
   public String getGroup() {
