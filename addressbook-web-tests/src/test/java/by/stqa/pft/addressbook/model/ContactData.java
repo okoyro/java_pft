@@ -15,6 +15,7 @@ public class ContactData {
   private String email2;
   private String email3;
   private String allEmails;
+  private String fullInfo;
 
   public ContactData withEmail(String email) {
     this.email = email;
@@ -55,10 +56,12 @@ public class ContactData {
     this.lastnane = lastnane;
     return this;
   }
+
   public ContactData withHomePhone(String homePhone) {
     this.homePhone = homePhone;
     return this;
   }
+
   public ContactData withMobilePhone(String mobilePhone) {
     this.mobilePhone = mobilePhone;
     return this;
@@ -86,6 +89,11 @@ public class ContactData {
 
   public int getId() {
     return id;
+  }
+
+  public ContactData withFullInfo(String fullInfo) {
+    this.fullInfo = fullInfo;
+    return this;
   }
 
   public String getFirstname() {
@@ -138,6 +146,10 @@ public class ContactData {
 
   public String getGroup() {
     return group;
+  }
+
+  public String getFullInfo() {
+    return fullInfo;
   }
 
   @Override

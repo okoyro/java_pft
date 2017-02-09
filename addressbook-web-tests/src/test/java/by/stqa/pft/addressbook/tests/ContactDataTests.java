@@ -38,7 +38,9 @@ public class ContactDataTests extends TestBase {
   }
 
   public static String cleaned(String phone) {
-    return phone.replaceAll("\\s", "").replaceAll("[-()]", ""); //"\\s" - это пробелы, "[-()]" - это все дефисы и скобки
+    return phone.replaceAll("\\s", "").replaceAll("[-()]", "").replaceAll("\n", "").replaceAll("H:","")
+            .replaceAll("M:","").replaceAll("W:","");
+    //"\\s" - это пробелы, "[-()]" - это все дефисы и скобки
   }
 
   @Test
@@ -51,7 +53,7 @@ public class ContactDataTests extends TestBase {
   }
 
   @Test
-  public void testContactEmail() {
+  public void testContactEmails() {
     app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromEditForm = app.contact().contactInfoFromEditForm(contact);
@@ -63,6 +65,25 @@ public class ContactDataTests extends TestBase {
     return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3()).stream()
             .map(ContactDataTests::cleaned)
             .filter((s) -> !s.equals("")).collect(Collectors.joining("\n"));
+  }
+
+  @Test
+  public void testAllContactInfo() {
+    app.goTo().homePage();
+    ContactData contact = app.contact().all().iterator().next();
+    ContactData contactInfoFromEditList = app.contact().contactInfoFromEditForm(contact);
+    ContactData contactInfoFromFullInfoForm = app.contact().contactInfoFromFullInfoForm(contact);
+
+    assertThat(mergeInfoFromEditForm(contactInfoFromEditList),
+               equalTo(ContactDataTests.cleaned(contactInfoFromFullInfoForm.getFullInfo())));
+  }
+
+  private String mergeInfoFromEditForm(ContactData contact) {
+    return Arrays.asList(contact.getFirstname(), contact.getLastnane(), contact.getAddress(),
+                         contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(), contact.getEmail(),
+                         contact.getEmail2(), contact.getEmail3()).stream()
+            .map(ContactDataTests::cleaned)
+            .filter((s) -> !s.equals("")).collect(Collectors.joining(""));
   }
 }
 
