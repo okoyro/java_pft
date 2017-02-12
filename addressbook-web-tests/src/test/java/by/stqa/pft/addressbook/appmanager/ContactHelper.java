@@ -48,6 +48,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("home"), contactData.getHomePhone());
     type(By.name("mobile"), contactData.getMobilePhone());
     type(By.name("work"), contactData.getWorkPhone());
+    attach(By.name("photo"), contactData.getPhoto());
     //    условие для проверки наличия/отсутствия элемента(выпадаюший список),
     // характерного только для страницы создания нового контакта
     if (creation) {
