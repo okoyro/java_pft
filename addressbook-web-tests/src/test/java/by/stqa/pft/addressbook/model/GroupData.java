@@ -1,7 +1,12 @@
 package by.stqa.pft.addressbook.model;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
+@XStreamAlias("group")
 public class GroupData {
   //меняем тип id со string на int потому что надо искать id с наибольшим числовым значением в тесте создания групп
+  @XStreamOmitField
   private int id = Integer.MAX_VALUE;
   private String name;
   private String header;
