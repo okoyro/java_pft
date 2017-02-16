@@ -1,5 +1,6 @@
 package by.stqa.pft.addressbook.model;
 
+import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -8,8 +9,11 @@ public class GroupData {
   //меняем тип id со string на int потому что надо искать id с наибольшим числовым значением в тесте создания групп
   @XStreamOmitField
   private int id = Integer.MAX_VALUE;
+  @Expose
   private String name;
+  @Expose
   private String header;
+  @Expose
   private String footer;
 
   public GroupData withId(int id) {
