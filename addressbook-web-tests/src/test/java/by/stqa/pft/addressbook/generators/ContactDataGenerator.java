@@ -93,9 +93,9 @@ public class ContactDataGenerator {
                            .withMobilePhone(String.format("22222222%s", i))
                            .withWorkPhone(String.format("33333333%s", i))
                            .withAddress(String.format("address %s", i))
-                           .withEmail(String.format("email_1 %s", i))
-                           .withEmail2(String.format("email_2 %s", i))
-                           .withEmail3(String.format("email_3 %s", i)));
+                           .withEmail(String.format("email1 %s", i))
+                           .withEmail2(String.format("email2 %s", i))
+                           .withEmail3(String.format("email3 %s", i)));
     }
     return contacts;
   }
