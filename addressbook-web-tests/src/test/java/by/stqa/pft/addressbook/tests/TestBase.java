@@ -7,8 +7,9 @@ import org.testng.annotations.BeforeSuite;
 
 public class TestBase {
 
-  protected static final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX); //этот метод должен быть static для
-  //доступа к переменной "app" из всех тестовых классов
+  protected static final ApplicationManager app
+          = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
+  //этот метод должен быть static для доступа к переменной "app" из всех тестовых классов
 
   @BeforeSuite
   public void setUp() throws Exception {
