@@ -145,9 +145,7 @@ public class ContactData {
     return email3;
   }
 
-  public String getAllEmails() {
-    return allEmails;
-  }
+  public String getAllEmails() { return allEmails; }
 
   public String getHomePhone() {
     return homePhone;
