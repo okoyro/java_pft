@@ -63,6 +63,28 @@ public class ContactCreationTests extends TestBase {
 
   @Test(dataProvider = "validContactsFromJson")
   public void testContactCreation(ContactData contact) {
+    app.goTo().homePage();
+    Contacts before = app.db().contacts();
+    app.goTo().newContactPage();
+    app.contact().fillNewContactForm(contact, true);
+    app.contact().submitContactCreation();
+    app.goTo().homePage();
+    Contacts after = app.db().contacts();
+    assertThat(after.size(), equalTo(before.size() + 1));
+    assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+  }
+
+  @Test(enabled = false)
+  public void testCurrentDir() {
+    File currentDir = new File(".");
+    System.out.println(currentDir.getAbsolutePath());
+    File photo = new File("src/test/resources/pft.png");
+    System.out.println(photo.getAbsolutePath());
+    System.out.println(photo.exists());
+  }
+
+  @Test (enabled = false) //data for contact gets from object in the testcase
+  public void testContactCreationVar() {
     Groups groups = app.db().groups();
     File photo = new File("src/test/resources/pft.png");
     ContactData newContact = new ContactData().withFirstname("Jain").withLastnane("Doe").
@@ -78,14 +100,5 @@ public class ContactCreationTests extends TestBase {
     Contacts after = app.db().contacts();
     assertThat(after.size(), equalTo(before.size() + 1));
     assertThat(after, equalTo(before.withAdded(newContact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-  }
-
-  @Test(enabled = false)
-  public void testCurrentDir() {
-    File currentDir = new File(".");
-    System.out.println(currentDir.getAbsolutePath());
-    File photo = new File("src/test/resources/pft.png");
-    System.out.println(photo.getAbsolutePath());
-    System.out.println(photo.exists());
   }
 }
