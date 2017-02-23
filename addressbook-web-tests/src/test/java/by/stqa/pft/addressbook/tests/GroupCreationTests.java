@@ -66,11 +66,11 @@ public class GroupCreationTests extends TestBase {
   @Test(enabled = false)
   public void testBadGroupCreation() {
     app.goTo().groupPage();
-    Groups before = app.group().all();
+    Groups before = app.db().groups();
     GroupData group = new GroupData().withName("test'"); //это негативный тест, т.к.  апостроф - запрещенный символ
     app.group().create(group);
     assertThat(app.group().сount(), equalTo(before.size()));
-    Groups after = app.group().all();
+    Groups after = app.db().groups();
     assertThat(after, equalTo(before));
   }
 }
