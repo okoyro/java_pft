@@ -3,7 +3,6 @@ package by.stqa.pft.addressbook.tests;
 import by.stqa.pft.addressbook.model.GroupData;
 import by.stqa.pft.addressbook.model.Groups;
 import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -30,6 +29,7 @@ public class GroupModificationTests extends TestBase {
     app.group().modify(group);
     assertThat(app.group().сount(), equalTo(before.size()));
     Groups after = app.db().groups();
-    MatcherAssert.assertThat(after, CoreMatchers.equalTo(before.without(modifiedGroup).withAdded(group)));
+    assertThat(after, CoreMatchers.equalTo(before.without(modifiedGroup).withAdded(group)));
+    verifyGroupListInUi();
   }
 }
