@@ -2,9 +2,12 @@ package by.stqa.pft.addressbook.tests;
 
 import by.stqa.pft.addressbook.model.ContactData;
 import by.stqa.pft.addressbook.model.Contacts;
+import by.stqa.pft.addressbook.model.GroupData;
+import by.stqa.pft.addressbook.model.Groups;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -50,22 +53,31 @@ public class ContactCreationTests extends TestBase {
     return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
   }
 
+  @BeforeMethod
+  public void ensurePreconditions() {
+    if (app.db().groups().size() == 0) {
+      app.goTo().groupPage();
+      app.group().create(new GroupData().withName("groupForContactTest"));
+    }
+  }
+
   @Test(dataProvider = "validContactsFromJson")
   public void testContactCreation(ContactData contact) {
+    Groups groups = app.db().groups();
+    File photo = new File("src/test/resources/pft.png");
+    ContactData newContact = new ContactData().withFirstname("Jain").withLastnane("Doe").
+            withAddress("Lenina,10, Brest, Belarus").withEmail("abc@test.test").withEmail2("abc2@test.test")
+            .withEmail3("abc3@test.test").withHomePhone("(111)11-1111").withMobilePhone("(222)22-2222")
+            .withWorkPhone("(333)33-3333").withPhoto(photo).inGroup(groups.iterator().next());
     app.goTo().homePage();
     Contacts before = app.db().contacts();
     app.goTo().newContactPage();
-    //    File photo = new File("src/test/resources/pft.png");
-    //    ContactData contact = new ContactData().withFirstname("Jain").withLastnane("Doe").
-    //            withAddress("Lenina,10, Brest, Belarus").withEmail("abc@test.test").withEmail2("abc2@test.test")
-    //            .withEmail3("abc3@test.test").withHomePhone("(111)11-1111").withMobilePhone("(222)22-2222")
-    //            .withWorkPhone("(333)33-3333").withPhoto(photo);
-    app.contact().fillNewContactForm(contact, true);
+    app.contact().fillNewContactForm(newContact, true);
     app.contact().submitContactCreation();
     app.goTo().homePage();
     Contacts after = app.db().contacts();
     assertThat(after.size(), equalTo(before.size() + 1));
-    assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+    assertThat(after, equalTo(before.withAdded(newContact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
 
   @Test(enabled = false)
