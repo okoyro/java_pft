@@ -46,6 +46,7 @@ public class DeleteContactFromGroupTests extends TestBase {
     app.contact().removeFromGroup();
 
     ContactData contact = app.db().contactById(contactId);
-    assertTrue(contact.getGroups().isEmpty());
+    long count = contact.getGroups().stream().filter((g) -> (g).getId() == group.getId()).count();
+    assertTrue(count == 0);
   }
 }
