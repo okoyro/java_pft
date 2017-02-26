@@ -83,7 +83,7 @@ public class ContactCreationTests extends TestBase {
     System.out.println(photo.exists());
   }
 
-  @Test (enabled = false) //data for contact gets from object in the testcase
+  @Test(enabled = false) //data for contact gets from object in the testcase
   public void testContactCreationVar() {
     Groups groups = app.db().groups();
     File photo = new File("src/test/resources/pft.png");

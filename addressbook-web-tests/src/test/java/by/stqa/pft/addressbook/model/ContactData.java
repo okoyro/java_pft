@@ -158,6 +158,11 @@ public class ContactData {
     return this;
   }
 
+  public ContactData withGroup(GroupData group) {
+    this.groups.add(group);
+    return this;
+  }
+
   public int getId() {
     return id;
   }

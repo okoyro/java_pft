@@ -12,6 +12,10 @@ import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
+  public ContactHelper(WebDriver wd) {
+    super(wd);
+  }
+
   public Contacts all() {
     Contacts contacts = new Contacts();
     List<WebElement> rows = wd.findElements(By.xpath("//tr[@name = 'entry']"));   //все строки на странице
@@ -27,10 +31,6 @@ public class ContactHelper extends HelperBase {
                            .withAddress(address).withAllEmails(allEmails));
     }
     return contacts;
-  }
-
-  public ContactHelper(WebDriver wd) {
-    super(wd);
   }
 
   public void submitContactCreation() {
@@ -74,9 +74,13 @@ public class ContactHelper extends HelperBase {
     }
   }
 
-  private void selectContactById(int id) {
+  private void editContactById(int id) {
     wd.findElement(By.cssSelector("a[href*='edit.php?id=" + id + "']")).click();
 
+  }
+
+  public void selectContactById(int id) {
+    wd.findElement(By.cssSelector(".center input[id='" + id + "']")).click();
   }
 
   public void submitContactModification() {
@@ -89,14 +93,14 @@ public class ContactHelper extends HelperBase {
   }
 
   public void modify(ContactData contact) {
-    selectContactById(contact.getId());
+    editContactById(contact.getId());
     fillNewContactForm(contact, false);
     submitContactModification();
     returnToHomePage();
   }
 
   public void delete(ContactData contact) {
-    selectContactById(contact.getId());
+    editContactById(contact.getId());
     deleteSelectedContact();
     returnToHomePage();
   }
@@ -154,5 +158,24 @@ public class ContactHelper extends HelperBase {
 
   public void returnToHomePage() {
     click(By.linkText("home"));
+  }
+
+  public int selectGroup() {
+    WebElement option = wd.findElements(By.cssSelector("select[name=\"to_group\"] option")).get(0);
+    option.click();
+    return Integer.decode(option.getAttribute("value"));
+  }
+
+  public void selectGroupById(int id) {
+    WebElement option = wd.findElement(By.cssSelector(String.format("select[name='group'] option[value = '%d']", id)));
+    option.click();
+  }
+
+  public void addContactToGroup(ContactData contact) {
+    wd.findElement(By.cssSelector("input[name=\"add\"]")).click();
+  }
+
+  public void removeFromGroup() {
+    wd.findElement(By.cssSelector("input[name='remove']")).click();
   }
 }
