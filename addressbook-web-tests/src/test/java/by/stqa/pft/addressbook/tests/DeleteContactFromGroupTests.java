@@ -9,6 +9,8 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.testng.Assert.assertTrue;
+
 public class DeleteContactFromGroupTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
@@ -35,14 +37,15 @@ public class DeleteContactFromGroupTests extends TestBase {
   @Test
   public void testDeleteContactFromGroup() {
     ContactData contactWithGroup = app.db().contacts().stream()
-             .filter(contact -> !contact.getGroups().isEmpty())
-             .findFirst().get();
-
+             .filter(contact -> !contact.getGroups().isEmpty()).findFirst().get();
     int contactId = contactWithGroup.getId();
     GroupData group = contactWithGroup.getGroups().iterator().next();
     app.goTo().homePage();
     app.contact().selectGroupById(group.getId());
     app.contact().selectContactById(contactId);
     app.contact().removeFromGroup();
+
+    ContactData contact = app.db().contactById(contactId);
+    assertTrue(contact.getGroups().isEmpty());
   }
 }
