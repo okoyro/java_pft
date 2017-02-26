@@ -8,6 +8,8 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.testng.Assert.assertTrue;
+
 public class AddContactToGroupTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
@@ -34,8 +36,9 @@ public class AddContactToGroupTests extends TestBase {
     app.contact().selectContactById(contactId);
     int groupId = app.contact().selectGroup();
     app.contact().addContactToGroup(contact);
-    ContactData contactData = app.db().contactById(contactId);
-    long count = contactData.getGroups().stream().filter((g) -> (g).getId() == groupId).count();
-    assert count > 0;
+
+    ContactData dbContact = app.db().contactById(contactId);
+    long count = dbContact.getGroups().stream().filter((g) -> (g).getId() == groupId).count();
+    assertTrue(count > 0);
   }
 }
