@@ -8,8 +8,8 @@ import org.testng.annotations.Test;
 public class GeoIpServiceTests {
   @Test
   public void testMyIp(){
-    GeoIP geoIP = new GeoIPService().getGeoIPServiceSoap12().getGeoIP("37.17.49.228");
-    Assert.assertEquals(geoIP.getCountryCode(), "BY");
+    GeoIP geoIP = new GeoIPService().getGeoIPServiceSoap12().getGeoIP("77.88.55.80");
+    Assert.assertEquals(geoIP.getCountryCode(), "RUS");
   }
 
 }
