@@ -1,6 +1,6 @@
 package by.stqa.pft.mantis.appmanager;
 
-import by.stqa.pft.mantis.Model.MailMessage;
+import by.stqa.pft.mantis.model.MailMessage;
 import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;

@@ -1,6 +1,5 @@
 package by.stqa.pft.mantis.appmanager;
 
-import by.stqa.pft.mantis.tests.SoapHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -21,6 +20,10 @@ public class ApplicationManager {
   private FtpHelper ftp;
   private MailHelper mailHelper;
   private SoapHelper soapHelper;
+  private SessionHelper sessionHelper;
+  private UserHelper userHelper;
+  private DbHelper dbHelper;
+
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -30,6 +33,8 @@ public class ApplicationManager {
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+
+    dbHelper = new DbHelper();
   }
 
   public void stop() {
@@ -52,6 +57,20 @@ public class ApplicationManager {
     }
     return registrationHelper;
   }
+
+ public SessionHelper session() {
+    if (sessionHelper == null) {
+      sessionHelper = new SessionHelper(this);
+    }
+    return sessionHelper;
+  }
+
+  public UserHelper user() {
+      if (userHelper == null) {
+        userHelper = new UserHelper(this);
+      }
+      return userHelper;
+    }
 
   public FtpHelper ftp() {
     if (ftp == null) {
@@ -83,10 +102,15 @@ public class ApplicationManager {
     }
     return mailHelper;
   }
-  public SoapHelper soap(){
-    if (soapHelper == null){
+
+  public SoapHelper soap() {
+    if (soapHelper == null) {
       soapHelper = new SoapHelper(this);
     }
     return soapHelper;
+  }
+
+  public DbHelper db() {
+    return dbHelper;
   }
 }

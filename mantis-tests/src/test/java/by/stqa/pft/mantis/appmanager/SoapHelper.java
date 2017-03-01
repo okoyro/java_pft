@@ -1,13 +1,12 @@
-package by.stqa.pft.mantis.tests;
+package by.stqa.pft.mantis.appmanager;
 
 import biz.futureware.mantis.rpc.soap.client.IssueData;
 import biz.futureware.mantis.rpc.soap.client.MantisConnectLocator;
 import biz.futureware.mantis.rpc.soap.client.MantisConnectPortType;
 import biz.futureware.mantis.rpc.soap.client.ObjectRef;
 import biz.futureware.mantis.rpc.soap.client.ProjectData;
-import by.stqa.pft.mantis.Model.Issue;
-import by.stqa.pft.mantis.Model.Project;
-import by.stqa.pft.mantis.appmanager.ApplicationManager;
+import by.stqa.pft.mantis.model.Issue;
+import by.stqa.pft.mantis.model.Project;
 
 import javax.xml.rpc.ServiceException;
 import java.math.BigInteger;

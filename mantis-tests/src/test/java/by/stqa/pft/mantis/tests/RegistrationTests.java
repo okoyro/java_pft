@@ -1,6 +1,6 @@
 package by.stqa.pft.mantis.tests;
 
-import by.stqa.pft.mantis.Model.MailMessage;
+import by.stqa.pft.mantis.model.MailMessage;
 import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

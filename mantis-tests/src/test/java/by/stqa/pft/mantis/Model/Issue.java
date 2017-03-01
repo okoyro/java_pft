@@ -1,4 +1,4 @@
-package by.stqa.pft.mantis.Model;
+package by.stqa.pft.mantis.model;
 
 public class Issue {
   private int id;

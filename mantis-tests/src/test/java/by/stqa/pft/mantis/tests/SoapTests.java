@@ -1,7 +1,7 @@
 package by.stqa.pft.mantis.tests;
 
-import by.stqa.pft.mantis.Model.Issue;
-import by.stqa.pft.mantis.Model.Project;
+import by.stqa.pft.mantis.model.Issue;
+import by.stqa.pft.mantis.model.Project;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
