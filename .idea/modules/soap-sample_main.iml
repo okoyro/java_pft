@@ -3,6 +3,9 @@
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/../../soap-sample/build/classes/main" />
     <exclude-output />
+    <content url="file://$MODULE_DIR$/../../soap-sample/scr">
+      <sourceFolder url="file://$MODULE_DIR$/../../soap-sample/scr/main/java" isTestSource="false" />
+    </content>
     <content url="file://$MODULE_DIR$/../../soap-sample/src/main">
       <sourceFolder url="file://$MODULE_DIR$/../../soap-sample/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../soap-sample/src/main/resources" type="java-resource" />
