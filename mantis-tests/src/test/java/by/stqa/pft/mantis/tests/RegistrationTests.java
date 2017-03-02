@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.lanwen.verbalregex.VerbalExpression;
 
+import javax.xml.rpc.ServiceException;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,7 +20,9 @@ public class RegistrationTests extends TestBase {
   }
 
   @Test
-  public void testRegistration() throws IOException, MessagingException {
+  public void testRegistration() throws IOException, MessagingException, ServiceException {
+    skipIfNotFixed("0000001");
+
     long now = System.currentTimeMillis();
     String user = String.format("user%s", now);
     String password = "password";

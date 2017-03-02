@@ -8,13 +8,15 @@ import com.jcabi.github.RepoCommits;
 import com.jcabi.github.RtGithub;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+
 public class GithubTests {
   @Test
-  public void testCommits() {
-    Github github = new RtGithub("da143dc6dec7c642998fe3aff6b8969c80887b47");
+  public void testCommits() throws IOException {
+    Github github = new RtGithub("fa3b549c13c5da6cce5d806cb5b3aee2b6c7365e");
     RepoCommits commits = github.repos().get(new Coordinates.Simple("okoyro", "java_pft")).commits();
     for (RepoCommit commit : commits.iterate(new ImmutableMap.Builder<String,String>().build())) {
-      System.out.println(commit);
+      System.out.println(new RepoCommit.Smart(commit).message());
     }
   }
 }
