@@ -5,6 +5,7 @@ import by.stqa.pft.addressbook.model.GroupData;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +30,9 @@ public class AddContactToGroupTests extends TestBase {
   }
 
   @Test
-  public void testAddContactToGroup() {
+  public void testAddContactToGroup() throws IOException {
+    skipIfNotFixed(1);
+
     app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();
     int contactId = contact.getId();

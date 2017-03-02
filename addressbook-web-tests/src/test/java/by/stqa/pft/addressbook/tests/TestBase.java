@@ -3,14 +3,18 @@ package by.stqa.pft.addressbook.tests;
 import by.stqa.pft.addressbook.appmanager.ApplicationManager;
 import by.stqa.pft.addressbook.model.GroupData;
 import by.stqa.pft.addressbook.model.Groups;
+import by.stqa.pft.addressbook.model.Issue;
+import org.hibernate.service.spi.ServiceException;
 import org.openqa.selenium.remote.BrowserType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -53,6 +57,16 @@ public class TestBase {
       assertThat(uiGroups, equalTo(dbGroups.stream()
                                            .map((g) -> new GroupData().withId(g.getId()).withName(g.getName()))
                                            .collect(Collectors.toSet())));
+    }
+  }
+  public boolean isIssueOpen(int issueId) throws IOException, ServiceException {
+    Issue issue = app.rest().getIssueById(issueId);
+    return issue.getState_name().equals("Open");
+  }
+
+  public void skipIfNotFixed(int issueId) throws IOException, ServiceException {
+    if (isIssueOpen(issueId)) {
+      throw new SkipException("Ignored because of issue " + issueId);
     }
   }
 }
