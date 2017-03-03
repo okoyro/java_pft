@@ -23,13 +23,13 @@ public class NavigationHelper extends HelperBase {
         && wd.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry")) {
       return;
     }
-    clickLink("http://localhost/addressbook/edit.php");
+    click(By.linkText("add new"));
   }
 
   public void homePage() {
     if (isElementPresent(By.id("maintable"))) {
       return;
     }
-    clickLink("http://localhost/addressbook/index.php");
+    click(By.linkText("home"));
   }
 }
